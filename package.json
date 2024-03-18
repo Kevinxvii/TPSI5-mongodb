@@ -1,7 +1,7 @@
 {
   "name": "express-sql",
   "version": "1.0.0",
-  "description": "",
+  "description": "first install all required libraries: npm install",
   "main": "index.js",
   "type": "module",
   "scripts": {

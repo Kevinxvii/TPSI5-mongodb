@@ -12,14 +12,15 @@ app.get('/',(req,res)=>{
     res.send("Welcome!")
 })
 
-app.get('/prodotti', async (req,res)=>{
-    const prodotti = await getAll(db, 'prodotti')
+app.get('/Prodotti', async (req,res)=>{
+    const prodotti = await getAll(db, 'Prodotti')
     res.json(prodotti)
 })
 
-app.get('/prodotti/:id', async (req,res)=>{
+app.get('/Prodotti/:id', async (req,res)=>{
     const id = req.params.id
-    const prodotto = await getOne(db, 'prodotti', id)
+    console.log(id)
+    const prodotto = await getOne(db, 'Prodotti', id)
     if (prodotto){
         res.json(prodotto)
     } else {
@@ -27,7 +28,7 @@ app.get('/prodotti/:id', async (req,res)=>{
     }
 })
 
-app.post('/prodotti', async (req, res)=>{
+app.post('/Prodotti', async (req, res)=>{
     console.log(req.body);
     const categoria = req.body?.categoria;
     const marca = req.body?.marca;
@@ -42,16 +43,16 @@ app.post('/prodotti', async (req, res)=>{
             modello,
             prezzo
         }
-        const prodotto = await createOne(db, 'prodotti', newProd)
+        const prodotto = await createOne(db, 'Prodotti', newProd)
         res.status(200).json(prodotto)
     } else{
         res.status(400).json({error:"body non conforme. inserire tutti i campi richiesti"})
     }
 })
 
-app.delete('/prodotti/:id', async (req,res)=>{
+app.delete('/Prodotti/:id', async (req,res)=>{
     const id = req.params.id
-    const prodotto = await deleteOne(db, 'prodotti', id)
+    const prodotto = await deleteOne(db, 'Prodotti', id)
     if(prodotto){
         res.status(200).send("Prodotto eliminato")
     }
@@ -60,7 +61,7 @@ app.delete('/prodotti/:id', async (req,res)=>{
     }
 })
 
-app.put('/prodotti/:id', async (req,res)=>{
+app.put('/Prodotti/:id', async (req,res)=>{
     const id = req.params.id
     const newValues = {}
 
@@ -73,7 +74,7 @@ app.put('/prodotti/:id', async (req,res)=>{
     if(req.body?.prezzo)
         newValues.prezzo = req.body.prezzo
 
-    const prodotto = await updateOne(db, 'prodotti', id, newValues)
+    const prodotto = await updateOne(db, 'Prodotti', id, newValues)
     if(prodotto){
         res.status(200).json(prodotto)
     }
