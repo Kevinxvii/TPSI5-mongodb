@@ -17,6 +17,7 @@ app.get('/Prodotti', async (req,res)=>{
     res.json(prodotti)
 })
 
+
 app.get('/Prodotti/:id', async (req,res)=>{
     const id = req.params.id
     console.log(id)
@@ -27,6 +28,7 @@ app.get('/Prodotti/:id', async (req,res)=>{
         res.status(404).json({message: "prodotto non trovato"})
     }
 })
+
 
 app.post('/Prodotti', async (req, res)=>{
     console.log(req.body);

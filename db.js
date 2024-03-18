@@ -23,7 +23,7 @@ export async function getAll(db,resource) {
 }
 
 export async function getOne(db,resource,_id){
-    const data = await db.collection(resource).findOne({ _id: String });
+    const data = await db.collection(resource).findOne({ _id: ObjectId   });
     return data;
 }
 
