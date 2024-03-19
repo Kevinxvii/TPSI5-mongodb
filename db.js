@@ -1,4 +1,4 @@
-import {MongoClient, ObjectId} from 'mongodb'
+import {MongoClient,ObjectId } from 'mongodb'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -22,8 +22,8 @@ export async function getAll(db,resource) {
     console.log(data)
 }
 
-export async function getOne(db,resource,_id){
-    const data = await db.collection(resource).findOne({ _id: ObjectId   });
+export async function getOne(db,resource,id){
+    const data = await db.collection(resource).findOne({ _id: new ObjectId(id)});
     return data;
 }
 
