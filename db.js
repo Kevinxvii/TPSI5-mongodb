@@ -27,14 +27,22 @@ export async function getOne(db,resource,id){
     return data;
 }
 
-export async function createOne(){
+export async function createOne(db , resource , newItem){
+    const data = await db.collection(resource).insertOne(newItem)
+    if(data?.acknowledged){
+        const id = data.insertedId  
+        return getOne(db,resource,id)
+    }
+    // console.log(data)
 
 }
 
-export async function deleteOne(){
-
+export async function deleteOne(db,resource,id){
+    const data = await db.collection(resource).deleteOne({ _id: new ObjectId(id)});
+    return data;
 }
 
-export async function updateOne(){
+export async function updateOne(db,resource,id, newValues){
+    const data = await db.collection(resource).updateOne({ _id: new ObjectId(id)}, {$set : newValues})
 
 }

@@ -12,23 +12,23 @@ app.get('/',(req,res)=>{
     res.send("Welcome!")
 })
 
-app.get('/Prodotti', async (req,res)=>{
-    const prodotti = await getAll(db, 'Prodotti')
+app.get('/:resource', async (req,res)=>{
+    const resource = req.params.resource 
+    const prodotti = await getAll(db, resource)
     res.json(prodotti)
 })
 
-
-app.get('/Prodotti/:id', async (req,res)=>{
+app.get('/resource/:id', async (req,res)=>{
     const id = req.params.id
+    const resource = req.params.resource
     console.log(id)
-    const prodotto = await getOne(db, 'Prodotti', id)
+    const prodotto = await getOne(db, resource, id)
     if (prodotto){
         res.json(prodotto)
     } else {
         res.status(404).json({message: "prodotto non trovato"})
     }
 })
-
 
 app.post('/Prodotti', async (req, res)=>{
     console.log(req.body);
@@ -52,9 +52,10 @@ app.post('/Prodotti', async (req, res)=>{
     }
 })
 
-app.delete('/Prodotti/:id', async (req,res)=>{
+app.delete('/resource/:id', async (req,res)=>{
     const id = req.params.id
-    const prodotto = await deleteOne(db, 'Prodotti', id)
+    const resource = req.params.resource
+    const prodotto = await deleteOne(db, resourc, id)
     if(prodotto){
         res.status(200).send("Prodotto eliminato")
     }
